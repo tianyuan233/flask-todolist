@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.douban.com/simple/"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+flask = "*"
+flask-script = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
+flask-login = "*"
+pymysql = "*"
+flask-mail = "*"
+flask-bootstrap = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
