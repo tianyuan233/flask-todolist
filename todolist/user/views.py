@@ -18,7 +18,7 @@ def register():
     if form.validate_on_submit():
         user = User(
             username=form.username.data,
-            password=generate_password_hash(form.password.data),
+            password=form.password.data,
             email=form.email.data
         )
         db.session.add(user)
@@ -38,7 +38,7 @@ def login():
     projectform = AddProject()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
-        if user:
+        if user and user.verify_password(form.password.data):
             login_user(user, True)
             flash('登录成功')
             return redirect(request.args.get('next') or url_for('main.index'))

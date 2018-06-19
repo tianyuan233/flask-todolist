@@ -8,8 +8,8 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     MYTODOIST_MAIL_PREFIX = '[Mytodoist]'
-    MYTODOIST_MAIL_SENDER = 'Mytodoist Admin <1234@qq.com>'
-    MYTODOIST_ADMIN = os.environ.get('MYTODOIST_ADMIN') or '1234@qq.com'
+    MYTODOIST_MAIL_SENDER = 'Mytodoist Admin <1406282384@qq.com>'
+    MYTODOIST_ADMIN = os.environ.get('MYTODOIST_ADMIN') or '1406282384@qq.com'
 
     @staticmethod
     def init_app(app):
