@@ -1,5 +1,5 @@
 from . import main
-
+from flask import render_template
 @main.route('/')
 def index():
-    return '<h1>AAAAAAAAAAAAAAAAAA</h1>'
+    return render_template('today.html')

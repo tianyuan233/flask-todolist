@@ -12,6 +12,7 @@ flask-login = "*"
 pymysql = "*"
 flask-mail = "*"
 flask-bootstrap = "*"
+flask-wtf = "*"
 
 [dev-packages]
 

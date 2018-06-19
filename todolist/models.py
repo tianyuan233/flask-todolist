@@ -33,8 +33,11 @@ class User(UserMixin, db.Model):
     def password(self, password):
         self.password_hash = generate_password_hash(password)
 
-    def verify_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    # def verify_password(self, password):
+    #     return check_password_hash(self.password_hash, password)
+    def check_password(self, password_hash):
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.password_hash, password_hash)
 
     def generate_confirmation_token(self, expiration=3600):
         s = Serializer(current_app.config['SECRET_KEY'], expiration)
@@ -97,5 +100,5 @@ class UserLog(db.Model):
     log = db.Column(db.String(128))
     timestamp = db.Column(db.DateTime, default=datetime.now)
 
-if __name__ == '__main__':
-    db.create_all()
+# if __name__ == '__main__':
+#     db.create_all()
