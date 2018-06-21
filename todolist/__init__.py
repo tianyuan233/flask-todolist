@@ -10,8 +10,8 @@ bootstrap = Bootstrap()
 mail = Mail()
 db = SQLAlchemy()
 login_manager = LoginManager()
-login_manager.session_protection = 'strong'
-login_manager.login_view = 'user.login'
+login_manager.session_protection = "strong"
+login_manager.login_view = "user.login"
 
 
 def create_app(config_name):
@@ -25,8 +25,10 @@ def create_app(config_name):
     login_manager.init_app(app)
 
     from .main import main
+
     app.register_blueprint(main)
     from .user import user
-    app.register_blueprint(user, url_prefix='/user')
+
+    app.register_blueprint(user, url_prefix="/user")
 
     return app

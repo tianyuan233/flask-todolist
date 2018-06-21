@@ -1,0 +1,44 @@
+<div class="modal-body">
+    <form role="form" method="post">
+        <fieldset>
+            <div class="form-group">
+                <span style="width: 80px;display: inline-block">{{ form.task.label }}</span> {{ form.task }}
+                {% for err in form.task.errors %}
+                <div style="color: red">{{ err }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <span style="width: 80px;display: inline-block">{{ form.project.label }}</span> {{ form.project }}
+                {% for err in form.project.errors %}
+                <div style="color: red">{{ err }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <span style="width: 80px;display: inline-block" >{{ form.title.label }}</span> {{ form.title }}
+                {% for err in form.title.errors %}
+                <div style="color: red">{{ err }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <span style="width: 80px;display: inline-block">{{ form.new_title.label }}</span> {{ form.new_title }}
+                {% for err in form.new_title.errors %}
+                <div style="color: red">{{ err }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <span style="width: 80px;display: inline-block">{{ form.timenode.label }}</span> {{ form.timenode }}
+                {% for err in form.timenode.errors %}
+                <div style="color: red">{{ err }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <span style="width: 80px;display: inline-block">{{ form.priority.label }}</span> {{ form.priority }}
+                {% for err in form.priority.errors %}
+                <div style="color: red">{{ err }}</div>
+                {% endfor %}
+            </div>
+            {{ form.csrf_token }}
+            {{ form.submit }}
+        </fieldset>
+    </form>
+</div>
