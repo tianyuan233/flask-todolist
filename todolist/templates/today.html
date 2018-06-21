@@ -5,6 +5,15 @@
     <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- bootstrap-progressbar -->
     <link href="{{ url_for('static',filename='css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/square/red.css') }}" rel="stylesheet">
+    <!-- <link href="{{ url_for('static',filename='css/polaris/polaris.css') }}" rel="stylesheet"> -->
+    <!--<link href="{{ url_for('static',filename='css/main.css') }}" rel="stylesheet">-->
+    <script src="{{ url_for('static',filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ url_for('static',filename='js/icheck.js') }}"></script>
 </head>
 <div class="container">
     {% for message in get_flashed_messages() %}
@@ -18,7 +27,8 @@
 
 <div class="ot-tasks">
     <h3><p style="color: red;">有过期的任务</p></h3>
-    {% set tasks=overdue_tasks %} {% include 'task_list.html' %}
+    {% set tasks=overdue_tasks %}
+    {% include 'task_list.html' %}
 </div>
 
 <div class="today-tasks">
@@ -29,82 +39,3 @@
         </script>
     </small></p></h2>
 </div>
-<div class="input-group" style="width: 50%">
-    <input type="text" class="form-control">
-    <span class="input-group-btn"><button type="button" class="btn btn-primary">Go!</button></span>
-</div>
-
-<div class="modal fade" id="add-project" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">添加项目</h4>
-                </div>
-                <div class="modal-body">
-                    {{ wtf.quick_form(projectform) }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    {% if current_user.is_authenticated %}
-                    <button type="submit" class="btn btn-primary" onclick="load()">提交</button>
-                    <script>
-                    function load() {
-                        document.getElementById("submit").click();
-                    }
-                    document.getElementById("submit").style.display = "none"
-                    </script>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="add-task" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">添加任务</h4>
-                </div>
-                <div class="modal-body">
-                    <form role="form" action="{{ url_for('main.add_task') }}" method="post">
-                        {{ edit_task_form.csrf_token }}
-                        <div class="form-group">
-                            {{ edit_task_form.task.label }} {{ edit_task_form.task(id="task",class ="form-control")}}
-                        </div>
-                        <div class="form-group">
-                            {{ edit_task_form.project.label }} {{ edit_task_form.project(id="project",class ="form-control")}}
-                        </div>
-                        <div class="form-group">
-                            {{ edit_task_form.title.label }} {{ edit_task_form.title(id="title",class ="form-control")}}
-                        </div>
-                        <div class="form-group">
-                            {{ edit_task_form.new_title.label }} {{ edit_task_form.new_title(id="new_title",class ="form-control")}}
-                        </div>
-                        <div class="form-group">
-                            {{ edit_task_form.timenode.label }} {{ edit_task_form.timenode(id="add-timenode",class ="form-control")}}
-                        </div>
-                        <div class="form-group">
-                            {{ edit_task_form.priority.label }} {{ edit_task_form.priority(id="priority",class ="form-control")}}
-                        </div>
-                        <button type="submit" class="btn btn-default" id="submit-add-task">提交</button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    {% if current_user.is_authenticated %}
-                    <button type="submit" class="btn btn-primary" id="newtask">提交</button>
-                    <script>
-                    // function task() {
-                    //     document.getElementById("tasksave").click();
-                    // }
-                    $("#newtask").on("click", function() {
-                        document.getElementById("submit-add-task").click();
-                    });
-                    document.getElementById("submit-add-task").style.display = "none";
-                    // document.getElementById("timenode").type="date";
-                    $("#add-timenode").datetimepicker({ format: 'yyyy-mm-dd' });
-                    </script>
-                    {% endif %}
-                </div>
-            </div>

@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from flask import render_template, redirect, url_for
-from flask_login import current_user
+from flask import render_template, redirect, url_for, request
+from flask_login import current_user, login_required
 from sqlalchemy import and_
 
 from todolist import db
@@ -64,3 +64,36 @@ def add_task():
             db.session.add(t)
             db.session.commit()
     return render_template("add-task.html", form=form)
+
+@main.route('/task/filish/<int:id>')
+@login_required
+def task_filish(id):
+    task = Task.query.get_or_404(id)
+    task.filish = True
+    db.session.add(task)
+    return redirect(request.referrer)
+
+
+@main.route('/task/unfilish/<int:id>')
+@login_required
+def task_unfilish(id):
+    task = Task.query.get_or_404(id)
+    task.filish = False
+    db.session.add(task)
+    return redirect(request.referrer)
+
+
+@main.route('/task/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_task(id):
+    task = Task.query.get_or_404(id)
+    if request.method == 'GET':
+        return redirect(url_for('.index'))
+    if request.method == 'POST':
+        task.task = request.form.get('task_task' + str(id))
+        if request.form.get('project' + str(id)):
+            task.project = request.form.get('project' + str(id))
+        task.timenode = request.form.get('timenode' + str(id))
+        task.priority = request.form.get('priority' + str(id))
+        db.session.add(task)
+    return redirect(request.referrer)
