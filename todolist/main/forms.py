@@ -15,28 +15,30 @@ class AddTask(FlaskForm):
     task = StringField(
         "任务：",
         validators=[DataRequired(), Length(1, 64)],
-        render_kw={"style": "width:20%;", "class": "form-control"},
+        render_kw={"style": "width:40%;", "class": "form-control"},
     )
     title = SelectField(
-        "标签：", coerce=int, render_kw={"style": "width:20%;", "class": "form-control"}
+        "标签：", coerce=int, render_kw={"style": "width:40%;", "class": "form-control"}
     )
     new_title = StringField(
-        "新标签：", render_kw={"style": "width:20%;", "class": "form-control"}
+        "新标签：", render_kw={"style": "width:40%;", "class": "form-control"}
     )
     project = SelectField(
-        "项目:", render_kw={"style": "width:20%;", "class": "form-control"}
+        "项目:", render_kw={"style": "width:40%;", "class": "form-control"}
     )
     timenode = StringField(
         "时间节点：",
-        render_kw={"style": "width:20%;", "class": "form-control"},
-        default=datetime.now().strftime("%Y-%m-%d"),
+        render_kw={"style": "width:40%;", "class": "form-control"},
     )
     priority = SelectField(
         "优先级：",
         choices=[("1", "1"), ("2", "2"), ("3", "3"), ("4", "4")],
         render_kw={"style": "width:20%;", "class": "form-control"},
     )
-    submit = SubmitField("保存")
+    submit = SubmitField(
+        "保存",
+        render_kw={"class": "btn btn-primary"}
+    )
 
     def __init__(self, *args, **kwargs):
         super(AddTask, self).__init__(*args, **kwargs)

@@ -4,7 +4,6 @@
     <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- bootstrap-progressbar -->
     <link href="{{ url_for('static',filename='css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static',filename='css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static',filename='css/square/red.css') }}" rel="stylesheet">
     <!-- <link href="{{ url_for('static',filename='css/polaris/polaris.css') }}" rel="stylesheet"> -->
@@ -12,6 +11,7 @@
     <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/bootstrap-datetimepicker.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/icheck.js') }}"></script>
+
 </head>
 
 <table class="table table-hover">
@@ -33,24 +33,18 @@
         <td>
             {% if t.filish %}
             <a href="{{ url_for('main.task_unfilish',id=t.id) }}">
-                <button type="button" class="btn btn-success btn-xs"><span
+                <button type="button" class="btn btn-success btn-sm"><span
                         class="glyphicon glyphicon-ok"></span></button>
             </a>
             {% else %}
             <a href="{{ url_for('main.task_filish',id=t.id) }}">
-                <button type="button" class="btn btn-warning btn-xs"><span
+                <button type="button" class="btn btn-warning btn-sm"><span
                         class="glyphicon glyphicon-remove"></span></button>
             </a>
             {% endif %}
         </td>
         <td>
-            <div class="dropdown">
-                    <a data-toggle="dropdown" href=""><span class="glyphicon glyphicon-edit"></span></a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <li><a href="#edit{{ t.id }}" data-toggle="modal">编辑任务</a></li>
-                        <li><a href="#">删除任务</a></li>
-                    </ul>
-                </div>
+            <button type="button" class="btn btn-primary btn-sm">编辑</button> <button type="button" class="btn btn-danger btn-sm">删除</button>
         </td>
         {% endfor %}
     </tr>

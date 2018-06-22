@@ -20,11 +20,12 @@ def main_form():
             return redirect(url_for(".index"))
 
 
-@main.route("/")
+@main.route("/", methods=["GET", "POST"])
 def index():
     now = datetime.now()
-    edit_task_form = AddTask()
+    default_timenode = datetime.now().strftime("%Y-%m-%d")
     projectform = AddProject()
+    form = AddTask()
     today_tasks = current_user.tasks.filter(
         Task.timenode == datetime.now().strftime("%Y-%m-%d")
     ).all()
@@ -35,16 +36,18 @@ def index():
     return render_template(
         "today.html",
         now=now,
-        edit_task_form=edit_task_form,
         projectform=projectform,
         today_tasks=today_tasks,
         overdue_tasks=overdue_tasks,
+        form=form,
+        default_timenode=default_timenode
     )
 
 
 @main.route("/add-task", methods=["GET", "POST"])
 def add_task():
     form = AddTask()
+    default_timenode = datetime.now().strftime("%Y-%m-%d")
     if form.validate_on_submit():
         t = Task(
             task=form.task.data,
@@ -59,11 +62,14 @@ def add_task():
             t.title = nt.id
             db.session.add(t)
             db.session.commit()
+            return redirect(url_for('main.index'))
         else:
             t.title = form.title.data
             db.session.add(t)
             db.session.commit()
-    return render_template("add-task.html", form=form)
+            return redirect(url_for('main.index'))
+    return render_template("add-task.html", form=form, default_timenode=default_timenode)
+
 
 @main.route('/task/filish/<int:id>')
 @login_required
@@ -85,7 +91,7 @@ def task_unfilish(id):
 
 @main.route('/task/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
-def edit_task(id):
+def task_edit(id):
     task = Task.query.get_or_404(id)
     if request.method == 'GET':
         return redirect(url_for('.index'))

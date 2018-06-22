@@ -1,19 +1,10 @@
 {% import "bootstrap/wtf.html" as wtf %}
 <head>
     <script src="{{ url_for('static',filename='js/moment-with-locales.js') }}"></script>
-    <!-- Bootstrap -->
     <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- bootstrap-progressbar -->
-    <link href="{{ url_for('static',filename='css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static',filename='css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static',filename='css/square/red.css') }}" rel="stylesheet">
-    <!-- <link href="{{ url_for('static',filename='css/polaris/polaris.css') }}" rel="stylesheet"> -->
-    <!--<link href="{{ url_for('static',filename='css/main.css') }}" rel="stylesheet">-->
     <script src="{{ url_for('static',filename='js/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static',filename='js/bootstrap-datetimepicker.min.js') }}"></script>
-    <script src="{{ url_for('static',filename='js/icheck.js') }}"></script>
 </head>
 <div class="container">
     {% for message in get_flashed_messages() %}
@@ -25,17 +16,102 @@
     {% endfor %}
 </div>
 
-<div class="ot-tasks">
+<div class="ot-tasks container">
+    {% if overdue_tasks %}
     <h3><p style="color: red;">有过期的任务</p></h3>
     {% set tasks=overdue_tasks %}
     {% include 'task_list.html' %}
+    {% endif %}
 </div>
 
-<div class="today-tasks">
-    <h2><p>今天<small style="color: darkcyan">
-        <script>
-            var time = moment('{{ now }}').locale('zh-cn').format('YYYY dddd MMMDo');
-            document.write(time);
-        </script>
-    </small></p></h2>
+<div class="today-tasks container">
+    <h2>
+        <p>今天
+            <small style="color: darkcyan">
+                <script>
+                    var time = moment('{{ now }}').locale('zh-cn').format('YYYY dddd MMMDo');
+                    document.write(time);
+                </script>
+            </small>
+        </p>
+    </h2>
+    {% set tasks=today_tasks %}
+    {% include 'task_list.html' %}
+</div>
+<!--添加任务 弹出框-->
+<div class="container">
+    <div class="">
+        <div class="col-md-12 column">
+            <a id="modal-424161" href="#modal-container-424161" role="button" class="btn btn-primary btn-sm"
+               data-toggle="modal">添加任务</a>
+            <div class="modal fade" id="modal-container-424161" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                添加任务
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="modal-body">
+                                <form role="form" action="/add-task" method="post">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <span style="width: 80px;display: inline-block">{{ form.task.label }}</span>
+                                            {{ form.task }}
+                                            {% for err in form.task.errors %}
+                                            <div style="color: red">{{ err }}</div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="form-group">
+                                            <span style="width: 80px;display: inline-block">{{ form.project.label }}</span>
+                                            {{ form.project }}
+                                            {% for err in form.project.errors %}
+                                            <div style="color: red">{{ err }}</div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="form-group">
+                                            <span style="width: 80px;display: inline-block">{{ form.title.label }}</span>
+                                            {{ form.title }}
+                                            {% for err in form.title.errors %}
+                                            <div style="color: red">{{ err }}</div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="form-group">
+                                            <span style="width: 80px;display: inline-block">{{ form.new_title.label }}</span>
+                                            {{ form.new_title }}
+                                            {% for err in form.new_title.errors %}
+                                            <div style="color: red">{{ err }}</div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="form-group">
+                                            <span style="width: 80px;display: inline-block">{{ form.timenode.label }}</span>
+                                            {{ form.timenode(value=default_timenode) }}
+                                            {% for err in form.timenode.errors %}
+                                            <div style="color: red">{{ err }}</div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="form-group">
+                                            <span style="width: 80px;display: inline-block">{{ form.priority.label }}</span>
+                                            {{ form.priority }}
+                                            {% for err in form.priority.errors %}
+                                            <div style="color: red">{{ err }}</div>
+                                            {% endfor %}
+                                        </div>
+                                        {{ form.csrf_token }}
+                                        {{ form.submit }}
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
