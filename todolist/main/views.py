@@ -21,6 +21,7 @@ def main_form():
 
 
 @main.route("/", methods=["GET", "POST"])
+@login_required
 def index():
     now = datetime.now()
     default_timenode = datetime.now().strftime("%Y-%m-%d")
@@ -33,6 +34,8 @@ def index():
         and_(Task.filish == False, Task.timenode < datetime.now().strftime("%Y-%m-%d"))
     ).all()
 
+    titles = Titles.query.filter_by(user_id=current_user.id).all()
+
     return render_template(
         "today.html",
         now=now,
@@ -40,11 +43,13 @@ def index():
         today_tasks=today_tasks,
         overdue_tasks=overdue_tasks,
         form=form,
-        default_timenode=default_timenode
+        default_timenode=default_timenode,
+        titles=titles
     )
 
 
 @main.route("/add-task", methods=["GET", "POST"])
+@login_required
 def add_task():
     form = AddTask()
     default_timenode = datetime.now().strftime("%Y-%m-%d")
@@ -103,3 +108,14 @@ def task_edit(id):
         task.priority = request.form.get('priority' + str(id))
         db.session.add(task)
     return redirect(request.referrer)
+
+
+@main.route('/task/delete/<int:id>', methods=['GET', 'POST'])
+@login_required
+def task_delete(id):
+    task = Task.query.get_or_404(id)
+    db.session.delete(task)
+    db.session.commit()
+    return redirect(request.referrer)
+
+
