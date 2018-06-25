@@ -35,6 +35,12 @@ h6 {
     font-size: .75em
 }
 
+.title li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
 a {
     color: #f4645f;
     outline: 0
@@ -76,20 +82,6 @@ a img, a:active, a:focus {
     border: 1px solid #303030;
     background: #303030;
     color: #fff
-}
-
-input[type=email], input[type=search], input[type=text], input[type=url], textarea {
-    padding: 7px 7px;
-    border: 1px solid #ebebeb;
-    border-radius: 2px;
-    -webkit-transition: all .2s;
-    -o-transition: all .2s;
-    transition: all .2s
-}
-
-input[type=email]:focus, input[type=search]:focus, input[type=text]:focus, input[type=url]:focus, textarea:focus {
-    border: 1px solid #f4645f;
-    outline: 0
 }
 
 blockquote {
@@ -174,103 +166,6 @@ pre {
 .main-navigation .menu {
     padding: 0;
     margin: 0
-}
-
-.main-navigation .menu li {
-    list-style: none;
-    display: inline-block;
-    position: relative
-}
-
-.main-navigation .menu li.nav-current {
-    border-bottom: 2px solid #f4645f;
-    margin-bottom: -2px
-}
-
-.main-navigation .menu li.red-dot:after {
-    content: '';
-    display: block;
-    background: red;
-    border-radius: 50%;
-    width: .6em;
-    height: .6em;
-    top: 30%;
-    right: 11px;
-    position: absolute
-}
-
-.main-navigation .menu li a {
-    color: #505050;
-    line-height: 4em;
-    display: block;
-    padding: 0 21px
-}
-
-.main-navigation .menu li:hover > a {
-    color: #f4645f;
-    text-decoration: none
-}
-
-.main-navigation .menu li ul {
-    visibility: hidden;
-    background: #fff;
-    text-align: left;
-    padding: 7px 0;
-    margin: 0;
-    position: absolute;
-    left: 0;
-    top: 120%;
-    width: 200px;
-    z-index: 999;
-    opacity: 0;
-    -webkit-transition: all .2s ease;
-    -o-transition: all .2s ease;
-    transition: all .2s ease
-}
-
-.main-navigation .menu li ul li {
-    display: block;
-    margin: 0
-}
-
-.main-navigation .menu li ul li a {
-    line-height: 2.5em;
-    color: #505050
-}
-
-.main-navigation .menu li ul:hover > a {
-    color: #f4645f
-}
-
-.main-navigation .menu li:hover ul {
-    visibility: visible;
-    opacity: 1;
-    top: 100%
-}
-
-@media (max-width: 767px) {
-    .main-navigation {
-        text-align: left
-    }
-
-    .main-navigation .menu li {
-        display: block
-    }
-
-    .main-navigation .menu li:hover > a {
-        color: #f4645f;
-        text-decoration: none
-    }
-
-    .main-navigation .menu li ul {
-        visibility: visible;
-        padding: 0 0 0 20px;
-        margin: 0;
-        position: relative;
-        top: 0;
-        width: 100%;
-        opacity: 1
-    }
 }
 
 .navbar-header {
@@ -512,41 +407,6 @@ pre {
 
 .post-content blockquote a {
     color: #666664
-}
-
-.post-content ol, .post-content ul {
-    margin: 0 0 24px 6px;
-    padding-left: 16px
-}
-
-.post-content ul {
-    list-style-type: square
-}
-
-.post-content ol {
-    list-style-type: decimal
-}
-
-.post-content li {
-    margin-bottom: .2em
-}
-
-.post-content li ol, .post-content li ul {
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-left: 14px
-}
-
-.post-content li ul {
-    list-style-type: disc
-}
-
-.post-content li ul ul {
-    list-style-type: circle
-}
-
-.post-content li p {
-    margin: .4em 0 .6em
 }
 
 .post-content .unstyled {
@@ -834,29 +694,6 @@ pre {
 .widget .social {
     padding: 0;
     margin: 0
-}
-
-.widget .social li {
-    display: inline-block;
-    margin: 0 2px 5px 0;
-    text-align: center
-}
-
-.widget .social li a i {
-    width: 35px;
-    height: 35px;
-    line-height: 35px;
-    border: 1px solid #ebebeb;
-    color: #959595;
-    -webkit-transition: all .2s;
-    -o-transition: all .2s;
-    transition: all .2s
-}
-
-.widget .social li:hover i {
-    color: #fff;
-    background: #f4645f;
-    border: 1px solid #f4645f
 }
 
 .widget .newsletter .input-group {

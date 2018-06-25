@@ -1,5 +1,5 @@
 <div class="widget">
-    <h5 class="title">个人信息</h5>
+    <h4 class="title">个人信息</h4>
     用户名：{{ current_user.username}}
     <br>
     {% if current_user.confirmed %}
@@ -10,16 +10,18 @@
 </div>
 
 <div class="widget">
-    <h5 class="title">标签</h5>
+    <h4 class="title">标签</h4>
     {% for t in titles %}
-    <ul>
-        <li>{{ t.title }}</li>
-    </ul>
+    <p><a href="###"><span class="glyphicon"></span> {{ t.title }}</a></p>
 
     {% endfor %}
 </div>
 
 
 <div class="widget">
-    <h5 class="title">项目</h5>
+    <h4 class="title">项目</h4>
+    {% for p in project %}
+        <p><a href="#"><span class="glyphicon glyphicon-{{ p.icon }}"></span> {{ p.name }}</a></p>
+    {% endfor %}
+
 </div>

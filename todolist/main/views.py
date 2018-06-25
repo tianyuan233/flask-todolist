@@ -1,4 +1,5 @@
-from datetime import datetime
+from collections import OrderedDict
+from datetime import datetime, timedelta
 
 from flask import render_template, redirect, url_for, request
 from flask_login import current_user, login_required
@@ -35,6 +36,7 @@ def index():
     ).all()
 
     titles = Titles.query.filter_by(user_id=current_user.id).all()
+    project = Project.query.filter_by(user_id=current_user.id).all()
 
     return render_template(
         "today.html",
@@ -44,7 +46,8 @@ def index():
         overdue_tasks=overdue_tasks,
         form=form,
         default_timenode=default_timenode,
-        titles=titles
+        titles=titles,
+        project=project
     )
 
 
@@ -118,4 +121,22 @@ def task_delete(id):
     db.session.commit()
     return redirect(request.referrer)
 
+
+@main.route('/sevenday', methods=['GET', 'POST'])
+@login_required
+def sevenday():
+    form = AddTask()
+    projectform = AddProject()
+    days = []
+    for i in range(7):
+        days.append((datetime.now() + timedelta(days=i)
+                     ).strftime("%Y-%m-%d"))
+    tasks7 = OrderedDict()
+    for day in days:
+        tasks7[day] = []
+        for task in current_user.tasks.all():
+            if task.timenode == day:
+                tasks7[day].append(task)
+    return render_template('seven-day.html', tasks7=tasks7, form=form,
+                           projectform=projectform)
 

@@ -28,7 +28,11 @@ class AddTask(FlaskForm):
     )
     timenode = StringField(
         "时间节点：",
-        render_kw={"style": "width:40%;", "class": "form-control"},
+        render_kw={
+            "style": "width:40%;",
+            "class": "form-control",
+            "id": "laydate"
+        },
     )
     priority = SelectField(
         "优先级：",

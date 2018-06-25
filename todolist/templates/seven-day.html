@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+    {% for task in tasks7 %}
+        <div class="task-day">
+            <h3>
+                <p>
+                    <small>
+                        <script>
+                            var time = moment('{{ task }}').locale('zh-cn').format('dddd MMMDo');
+                            document.write(time);
+                        </script>
+                    </small>
+                </p>
+            </h3>
+            {% include 'add-task.html' %}
+            {% if tasks7[task] %}
+                {% set tasks=tasks7[task] %}
+                {% include 'task_list.html' %}
+            {% endif %}
+        </div>
+    {% endfor %}
+{% endblock content %}
