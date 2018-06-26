@@ -7,10 +7,10 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
     <title>Flask-TODOLIST</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.css') }}">
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/datepicker3.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='laydate/laydate.js') }}"></script>
+
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -70,9 +70,6 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="{{ url_for('static', filename='laydate/laydate.js') }}"></script>
-<script src="{{ url_for('static', filename='laydate/layui.all.js') }}"></script>
-
 <script src="{{ url_for('static',filename='js/moment-with-locales.js') }}"></script>
 <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
