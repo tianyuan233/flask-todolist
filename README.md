@@ -22,8 +22,8 @@ python manage.py runserver
 ```
 #### 首页
 
-![](./1.png)
+![](https://github.com/tianyuan233/fuckingflask_todolist/raw/master/1.png)
 
 #### 添加todolist
 
-![](./2.png)
+![](https://github.com/tianyuan233/fuckingflask_todolist/raw/master/2.png)
