@@ -20,3 +20,10 @@ git clone https://github.com/tianyuan233/fuckingflask_todolist
 cd fuckingflask_todolist
 python manage.py runserver
 ```
+#### 首页
+
+![](./1.png)
+
+#### 添加todolist
+
+![](./2.png)
